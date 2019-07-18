@@ -1,0 +1,14 @@
+<div>
+
+    <span *ngFor="let control of controls" class="form-row">
+      <control [control]="control"></control>
+    </span>
+
+    <div class="form-row">
+      <button mat-button type="submit" [disabled]="!allValid()" (click)="onSubmit()">{{buttonText}}</button>
+    </div>
+
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+  </div>
+</div>

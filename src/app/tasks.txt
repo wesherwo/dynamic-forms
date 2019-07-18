@@ -1,0 +1,14 @@
+login page
+    login
+    register
+
+profile page
+    view tab
+    edit tab
+
+database
+    forms
+    user details
+
+employer
+    page picture

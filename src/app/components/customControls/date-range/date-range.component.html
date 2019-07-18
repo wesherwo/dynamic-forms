@@ -1,0 +1,11 @@
+<mat-form-field>
+    <input matInput [matDatepicker]="picker1" [value]="control.startDate" (dateChange)="control.updateStartDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="picker2" [value]="control.endDate" (dateChange)="control.updateEndDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
