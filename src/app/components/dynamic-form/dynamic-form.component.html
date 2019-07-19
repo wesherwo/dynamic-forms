@@ -7,8 +7,4 @@
     <div class="form-row">
       <button mat-button type="submit" [disabled]="!allValid()" (click)="onSubmit()">{{buttonText}}</button>
     </div>
-
-  <div *ngIf="payLoad" class="form-row">
-    <strong>Saved the following values</strong><br>{{payLoad}}
-  </div>
 </div>

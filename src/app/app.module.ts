@@ -1,3 +1,4 @@
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -10,12 +11,18 @@ import { DateRangeComponent } from './components/customControls/date-range/date-
 import { MatDatepickerModule, MatSlideToggleModule, MatSliderModule, MatCheckboxModule, MatButtonModule, 
   MatSelectModule, MatNativeDateModule, MatRadioModule, MatInputModule } from '@angular/material';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { DatabaseService } from './services/database.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ControlService } from './services/control.service';
 
 @NgModule({
-  imports: [BrowserModule, ReactiveFormsModule, FormsModule, StarRatingModule.forRoot(),
+  imports: [AppRoutingModule, HttpClientModule, BrowserModule, ReactiveFormsModule, FormsModule, StarRatingModule.forRoot(),
     MatInputModule, BrowserAnimationsModule, MatRadioModule, MatDatepickerModule, MatNativeDateModule,
     MatSelectModule, MatButtonModule, MatCheckboxModule, MatSliderModule, MatSlideToggleModule],
-  declarations: [AppComponent, DynamicFormComponent, DynamicFormControlComponent, DateRangeComponent, RegistrationComponent],
+
+  declarations: [routingComponents, AppComponent, DynamicFormComponent, DynamicFormControlComponent, DateRangeComponent, RegistrationComponent],
+
+  providers: [DatabaseService,ControlService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

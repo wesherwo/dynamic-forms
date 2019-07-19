@@ -1,0 +1,14 @@
+[
+    {"type":"Textbox",
+    "options":{"key": "firstName",
+    "label": "First name",
+    "order": 1}
+},
+
+{"type":"Textbox",
+  "options":{"key": "lastName",
+  "label": "Last name",
+  "order": 2,
+  "inLine":true}
+}
+]

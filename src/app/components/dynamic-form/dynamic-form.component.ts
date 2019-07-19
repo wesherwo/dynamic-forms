@@ -1,4 +1,4 @@
-import { Component, Input }  from '@angular/core';
+import { Component, Input, Output, EventEmitter }  from '@angular/core';
 import { ControlBase } from 'src/app/controls/control-base';
 
 @Component({
@@ -9,7 +9,7 @@ export class DynamicFormComponent {
 
   @Input() controls: ControlBase<any>[] = [];
   @Input() buttonText:string;
-  payLoad = '';
+  @Output() result = new EventEmitter();
 
   constructor() {  }
 
@@ -23,19 +23,20 @@ export class DynamicFormComponent {
   }
 
   onSubmit() {
-    this.payLoad = "{";
+    let payLoad = "{";
     for(var i = 0; i < this.controls.length; i++){
-      this.payLoad += "\"" + this.controls[i].key + "\":\"";
+      payLoad += "\"" + this.controls[i].key + "\":\"";
       if(this.controls[i].getValue() != undefined){
-        this.payLoad += this.controls[i].getValue() + "\"";
+        payLoad += this.controls[i].getValue() + "\"";
       } else {
-        this.payLoad += "\"\"";
+        payLoad += "\"\"";
       }
       if(i < this.controls.length - 1){
-        this.payLoad += ",";
+        payLoad += ",";
       }
     }
-    this.payLoad += "}";
+    payLoad += "}";
+    this.result.emit(payLoad);
   }
 
 }

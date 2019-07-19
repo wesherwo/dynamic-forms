@@ -30,7 +30,10 @@
     "angular-in-memory-web-api": "github:brandonroberts/in-memory-web-api-bazel#50a34d8",
     "angular-star-rating": "^4.0.0-beta.3",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "css-star-rating": "^1.2.4",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
     "rxjs": "^6.5.1",
     "zone.js": "~0.9.1"
   },
