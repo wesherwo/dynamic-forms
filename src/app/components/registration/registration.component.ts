@@ -8,7 +8,7 @@ import { DatabaseService } from 'src/app/services/database.service';
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent  implements OnInit{
-  controls: any[];
+  controls: any[] = [];
 
   constructor(private cs: ControlService, private dbs: DatabaseService) {
   }
@@ -16,19 +16,10 @@ export class RegistrationComponent  implements OnInit{
   ngOnInit() {
     this.dbs.getFormById(1).subscribe((form:string)=>{
       this.controls = this.cs.getControls(form);
-    })
-    // this.apiService.updatePolicy(form.value).subscribe((policy: Policy)=>{
-    //   console.log("Policy updated" , policy);
-    // });
-    // this.apiService.createPolicy(form.value).subscribe((policy: Policy)=>{
-    //   console.log("Policy created, ", policy);
-    // });
-    // this.apiService.deletePolicy(id).subscribe((policy: Policy)=>{
-    //   console.log("Policy deleted, ", policy);
-    // });
+    });
   }
 
   onSubmit(data){
-
+    this.dbs.addUser(data).subscribe();
   }
 }

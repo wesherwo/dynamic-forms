@@ -29,7 +29,7 @@ export class DynamicFormComponent {
       if(this.controls[i].getValue() != undefined){
         payLoad += this.controls[i].getValue() + "\"";
       } else {
-        payLoad += "\"\"";
+        payLoad += "\"";
       }
       if(i < this.controls.length - 1){
         payLoad += ",";
