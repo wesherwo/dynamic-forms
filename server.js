@@ -27,13 +27,14 @@ app.set('port', port); // set express to use this port
 app.get('/form/:id', getForm);
 app.post('/login', login);
 app.post('/adduser', addUser);
+app.post('/updateuser', updateUser);
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
 
 function getForm(req, res) {
-  console.log("form/"+ req.params.id);
+  console.log("form/" + req.params.id);
   let query = "SELECT form FROM `forms` where id=" + req.params.id;
 
   // execute query
@@ -50,16 +51,16 @@ function login(req, res) {
   console.log("login");
   let username = req.body.username;
   let password = req.body.password;
-  let usernameQuery = "SELECT * FROM `users` WHERE username = '" + username + "' AND password= '" + password + "'";
+  let query = "SELECT * FROM users WHERE username = '" + username + "' AND password= '" + password + "'";
 
-  db.query(usernameQuery, (err, result) => {
+  db.query(query, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     }
     if (result.length == 0) {
       message = 'Username or Password incorrect';
     } else {
-      let query = "SELECT * FROM `users` WHERE username = '" + username + "'";
+      let query = "SELECT * FROM users WHERE username = '" + username + "'";
       db.query(query, (err, result) => {
         if (err) {
           return res.status(500).send(err);
@@ -73,25 +74,55 @@ function login(req, res) {
 function addUser(req, res) {
   console.log("adduser");
   let username = req.body.username;
-  let password = req.body.password;
-  let firstname = req.body.firstname;
-  let lastname = req.body.lastname;
-  let usernameQuery = "SELECT * FROM `users` WHERE username = '" + username + "'";
+  let usernameQuery = "SELECT * FROM users WHERE username = '" + username + "'";
 
   db.query(usernameQuery, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     }
     if (result.length > 0) {
-      return 'Username already exists';
+      return res.send('{"text":"Username already exists"}');
     } else {
-      let query = "INSERT INTO `users` (username, password, firstname, lastname) VALUES ('" +
-        username + "', '" + password + "', '" + firstname + "', '" + lastname +  "')";
+      let userDetails = Object.entries(req.body);
+      let query = "INSERT INTO users (";
+      for (var i = 0; i < userDetails.length; i++) {
+        query += userDetails[i][0];
+        if (i < userDetails.length - 1) {
+          query += ", ";
+        }
+      }
+      query += ") VALUES (";
+      for (var i = 0; i < userDetails.length; i++) {
+        query += "'" + userDetails[i][1] + "'";
+        if (i < userDetails.length - 1) {
+          query += ", ";
+        }
+      }
+      query += ")";
       db.query(query, (err, result) => {
         if (err) {
           return res.status(500).send(err);
         }
+        return res.send('{"text":"success"}');
       });
+    }
+  });
+};
+
+function updateUser(req, res) {
+  console.log("updateuser");
+  let userDetails = Object.entries(req.body.userdetails);
+  let query = "UPDATE users SET";
+  for (var i = 0; i < userDetails.length; i++) {
+    query += " " + userDetails[i][0] + "='" + userDetails[i][1] + "'";
+    if (i < userDetails.length - 1) {
+      query += ",";
+    }
+  }
+  query += " WHERE id='" + req.body.id + "'";
+  db.query(query, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
     }
   });
 };

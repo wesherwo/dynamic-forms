@@ -5,6 +5,7 @@ export class Textbox extends ControlBase<string> {
 
   constructor(options: {} = {}) {
     super(options);
+    this.value = options['value'] || '';
   }
 
   update(newValue) {

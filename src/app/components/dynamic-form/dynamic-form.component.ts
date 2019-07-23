@@ -25,11 +25,11 @@ export class DynamicFormComponent {
   onSubmit() {
     let payLoad = "{";
     for(var i = 0; i < this.controls.length; i++){
-      payLoad += "\"" + this.controls[i].key + "\":\"";
+      payLoad += '"' + this.controls[i].key + '":"';
       if(this.controls[i].getValue() != undefined){
-        payLoad += this.controls[i].getValue() + "\"";
+        payLoad += this.controls[i].getValue() + '"';
       } else {
-        payLoad += "\"";
+        payLoad += '"';
       }
       if(i < this.controls.length - 1){
         payLoad += ",";

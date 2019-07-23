@@ -18,4 +18,8 @@ export class DatabaseService {
     addUser(newUser) {
         return this.httpClient.post<string>(this.API_SERVER + "/adduser", JSON.parse(newUser));
     }
+
+    updateUser(user){
+        return this.httpClient.post<string>(this.API_SERVER + "/updateuser", JSON.parse(user));
+    }
 }

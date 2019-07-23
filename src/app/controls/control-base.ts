@@ -1,5 +1,3 @@
-import value from '*.json';
-
 export class ControlBase<T> {
   value: T;
   key: string;
@@ -9,6 +7,7 @@ export class ControlBase<T> {
   controlType: string;
   inLine: boolean;
   errorMessage: string;
+  disabled: boolean;
 
   constructor(options: {
     value?: T,
@@ -17,8 +16,9 @@ export class ControlBase<T> {
     required?: boolean,
     order?: number,
     controlType?: string,
-    inLine?: boolean
-    errorMessage?: string
+    inLine?: boolean,
+    errorMessage?: string,
+    disabled?: boolean
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -28,6 +28,7 @@ export class ControlBase<T> {
     this.controlType = options.controlType || '';
     this.inLine = options.inLine || false;
     this.errorMessage = options.errorMessage || this.label + " is required";
+    this.disabled = options.disabled || false;
   }
 
   setValue(newvalue) {
