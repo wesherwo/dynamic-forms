@@ -19,11 +19,17 @@ As an example there can be a database running with the form data.
 The test DB that was used was made with the following mySql instructions.
 
 create database if not exists clicksource;
+
 use clicksource;
+
 create table forms( id int not null auto_increment, form text, primary key(id));
+
 insert into forms(form) values('[{"type":"Textbox","options":{"key": "username","label": "Username","order": 1}},{"type":"Textbox","options":{"key": "password","label": "Password","order": 2,"inLine":true}},{"type":"Textbox","options":{"key": "firstname","label": "First name","order": 3}},{"type":"Textbox","options":{"key": "lastname","label": "Last name","order": 4,"inLine":true}}]');
+
 insert into forms(form) values('[{"type":"Textbox","options":{"key": "username","label": "Username","order": 1}},{"type":"Textbox","options":{"key": "password","label": "Password","order": 2,"inLine":true}}]');
+
 create table users( id int not null auto_increment, username varchar(255), password varchar(255), firstname varchar(255), lastname varchar(255), primary key(id));
+
 create table managers( id int not null auto_increment, username varchar(255), password varchar(255), firstname varchar(255), lastname varchar(255), primary key(id));
 
 ## Code scaffolding
